@@ -1,0 +1,108 @@
+@backgroundColor: rgba(0, 0, 0, 0.8);
+@textColor: #fff;
+
+.top-panel {
+    background-color: @backgroundColor;
+    z-index: 25;
+    padding-left: 120px;
+    padding-right: 345px;
+    margin-right: 10px;
+    
+    .site-logo {
+        position: fixed;
+        top: 0;
+        background-color: lighten(@mainColor, 7%);
+        z-index: 50;
+        width: 100px;
+        height: 90px;
+        font-size: 19px;
+        padding: 10px;
+        padding-top: 15px;
+        color: @textColor;
+        text-align: center;
+        text-transform: uppercase;
+        left: 9px;
+        border-left: 1px solid darken(@mainColor, 10%);
+        border-right: 1px solid darken(@mainColor, 10%);
+        
+        .top-hat {
+            top: 90px;
+            transform: scaleY(-1);
+            background-image: url(../images/discount.svg);
+        }
+        
+        a {
+            text-decoration: none;
+            background-color: transparent;
+            color: @textColor;
+        }
+        
+        .site-logo-title {
+            z-index: 50;
+        }
+        
+        .site-logo-title-main {
+            z-index: 50;
+            font-size: 25px;
+            font-weight: 700;
+        }
+        
+    }
+    
+    .top-panel-up-row {
+        width: 100%;
+        font-size: 12px;
+        line-height: 11px;
+        margin: 0;
+        margin-top: 15px;
+        margin-left: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid lighten(@backgroundColor, 90%);
+        color: lighten(@backgroundColor, 90%);
+        
+        .main-top-panel-up-row {
+            
+            .phone-number, .work-days, .delivery {
+                font-size: 15px;
+                padding-right: 30px;
+                padding-bottom: 15px;
+            }
+            
+            .phone-number {
+                font-size: 20px;
+            }
+            
+            .sign-in-button {
+                float: right;
+                color: lighten(@mainColor, 85%);
+                font-size: 14px;
+                font-weight: 500;
+                width: 70px;
+                margin-top: -10px;
+                display: inline-block;
+                background-image: linear-gradient(to bottom, lighten(@mainColor, 15%) 0,lighten(@mainColor, 5%) 100%);
+                border: lighten(@mainColor, 5%);
+            }
+            
+        }
+        
+    }
+    
+    .top-panel-down-row {
+        padding-bottom: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-left: 10px;
+        
+        .pizza-page {
+            color: @textColor;
+            
+            a {
+                color: @textColor;
+            }
+            
+        }
+        
+    }
+    
+}
