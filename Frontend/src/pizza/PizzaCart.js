@@ -13,11 +13,25 @@ var PizzaSize = {
 var Cart = [];
 
 //HTML едемент куди будуть додаватися піци
-var $cart = $("#cart");
+var $cart = $(".orders-list");
+
+$(".clear-orders-list").click(function() {
+    Cart.length = 0;
+    updateCart();
+});
 
 function addToCart(pizza, size) {
     //Додавання однієї піци в кошик покупок
-
+    
+    for(var i = 0; i < Cart.length; i++) {
+        var order = Cart[i];
+        if(order.pizza == pizza && order.size == size) {
+            order.quantity++;
+            updateCart();
+            return;
+        }
+    }
+    
     //Приклад реалізації, можна робити будь-яким іншим способом
     Cart.push({
         pizza: pizza,
@@ -32,6 +46,13 @@ function addToCart(pizza, size) {
 function removeFromCart(cart_item) {
     //Видалити піцу з кошика
     //TODO: треба зробити
+    
+    for(var i = 0; i < Cart.length; i++) {
+        if(Cart[i] == cart_item) {
+            Cart.splice(i,1);
+            break;
+        }
+    }
 
     //Після видалення оновити відображення
     updateCart();
@@ -70,9 +91,40 @@ function updateCart() {
             //Оновлюємо відображення
             updateCart();
         });
+        
+        $node.find(".minus").click(function(){
+            if(cart_item.quantity > 1) {
+                cart_item.quantity -= 1;
+            } else {
+                for(var i = 0; i < Cart.length; i++) {
+                    if(Cart[i] == cart_item) {
+                        Cart.splice(i,1);
+                        break;
+                    }
+                }
+            }
+            
+            updateCart();
+        });
+        
+        $node.find(".count-clear").click(function(){
+            removeFromCart(cart_item);
+            //Оновлюємо відображення
+            updateCart();
+        });
 
         $cart.append($node);
     }
+    
+    $(".orders-counter-span").text(Cart.length);
+    
+    $(".sum-total").text(function() {
+        var sum = 0;
+        Cart.forEach(function(order) {
+            (order.size == PizzaSize.Small)? sum = sum + order.pizza.small_size.price * order.quantity: sum = sum + order.pizza.big_size.price * order.quantity;
+        })
+        return sum;
+    });
 
     Cart.forEach(showOnePizzaInCart);
 
